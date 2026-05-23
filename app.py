@@ -36,49 +36,50 @@ with st.sidebar:
     st.markdown("---")
     st.markdown("**About**")
     st.markdown(
-        "This tool uses Claude to extract structured insights from biomedical abstracts — "
+        "This tool uses Claude to extract structured insights from biomedical papers — "
         "including objectives, methods, findings, drug targets, and clinical implications."
     )
     st.markdown("---")
 
 # --- Main input ---
-st.subheader("Paste your abstract")
-abstract = st.text_area(
-    label="Abstract text",
-    placeholder="Paste a biomedical research abstract here...",
-    height=250,
+st.subheader("Paste your paper")
+st.caption("Paste the full text of a biomedical research paper — abstract, methods, results, and discussion.")
+paper_text = st.text_area(
+    label="Paper text",
+    placeholder="Paste the full paper text here...",
+    height=400,
     label_visibility="collapsed",
 )
 
-analyze = st.button("Analyze Paper", type="primary", use_container_width=False)
+analyze = st.button("Analyze Paper", type="primary")
 
 # --- Analysis ---
 if analyze:
     if not api_key:
         st.error("Please enter your Anthropic API key in the sidebar.")
-    elif not abstract.strip():
-        st.warning("Please paste an abstract before analyzing.")
+    elif not paper_text.strip():
+        st.warning("Please paste a paper before analyzing.")
     else:
-        with st.spinner("Analyzing abstract..."):
+        with st.spinner("Analyzing paper..."):
             try:
                 client = anthropic.Anthropic(api_key=api_key)
                 message = client.messages.create(
                     model="claude-sonnet-4-20250514",
-                    max_tokens=1024,
+                    max_tokens=2048,
                     messages=[
                         {
                             "role": "user",
-                            "content": f"""You are a biomedical research assistant. Analyze the abstract below and return a structured summary using exactly these six sections. Use markdown bold headers for each section.
+                            "content": f"""You are a biomedical research assistant. Read the full research paper below and provide a comprehensive structured summary using exactly these six sections. Use markdown bold headers for each section.
 
 1. **Research Objective** — What question or problem does this study address?
 2. **Methods Used** — What experimental, computational, or statistical approaches were used?
-3. **Key Findings** — What were the main results?
-4. **Drug Targets or Biological Entities Mentioned** — List genes, proteins, pathways, drugs, or organisms.
-5. **Clinical or Research Implications** — Why do these findings matter?
-6. **Limitations** — What limitations are stated or implied?
+3. **Key Findings** — What were the main results? Include specific data points or statistics where relevant.
+4. **Drug Targets or Biological Entities Mentioned** — List genes, proteins, pathways, drugs, disease models, or organisms.
+5. **Clinical or Research Implications** — Why do these findings matter? What do they enable or suggest?
+6. **Limitations** — What limitations are stated or implied by the authors?
 
-Abstract:
-{abstract}""",
+Paper:
+{paper_text}""",
                         }
                     ],
                 )
