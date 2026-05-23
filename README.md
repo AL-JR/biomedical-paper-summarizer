@@ -4,21 +4,22 @@
   <img src="images/caduceus.png" alt="Biomedical Paper Summarizer Logo" width="200"/>
 </p>
 
-A Streamlit web app that extracts structured insights from biomedical research abstracts using the Anthropic Claude API.
-
-Paste any biomedical abstract and get an instant, structured breakdown — ideal for researchers, students, and anyone navigating dense scientific literature.
+A Streamlit web app that extracts structured insights from full biomedical research papers using the Anthropic Claude API. Upload a PDF (including graphs and figures) or paste plain text and get an instant, structured breakdown — ideal for researchers, students, and anyone navigating dense scientific literature.
 
 ---
 
 ## Features
 
+- **PDF upload** — extracts full text and renders page images so Claude can analyze graphs, figures, and tables
+- **Plain text input** — paste paper text directly as an alternative
 - Structured extraction across 6 key dimensions:
   - Research Objective
   - Methods Used
-  - Key Findings
+  - Key Findings (with figure references)
   - Drug Targets / Biological Entities
   - Clinical or Research Implications
   - Limitations
+- Multimodal analysis via Claude Vision — figures and graphs are included in the analysis
 - Clean, professional UI with sidebar configuration
 - Secure API key input (never stored)
 - Error handling for auth failures and rate limits
@@ -31,6 +32,7 @@ Paste any biomedical abstract and get an instant, structured breakdown — ideal
 |---|---|
 | Frontend | Streamlit |
 | AI / LLM | Anthropic Claude (`claude-sonnet-4-20250514`) |
+| PDF Parsing | PyMuPDF |
 | Language | Python 3.11 |
 | Deployment | Hugging Face Spaces (planned) |
 
