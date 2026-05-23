@@ -1,5 +1,9 @@
 # 🧬 Biomedical Paper Summarizer
 
+<p align="center">
+  <img src="images/caduceus.png" alt="Biomedical Paper Summarizer Logo" width="200"/>
+</p>
+
 A Streamlit web app that extracts structured insights from biomedical research abstracts using the Anthropic Claude API.
 
 Paste any biomedical abstract and get an instant, structured breakdown — ideal for researchers, students, and anyone navigating dense scientific literature.
