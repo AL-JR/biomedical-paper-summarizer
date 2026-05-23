@@ -13,7 +13,7 @@ st.set_page_config(
 col_logo, col_title = st.columns([1, 6])
 with col_logo:
     try:
-        st.image("images/caduceus.png", width=80)
+        st.image("images/caduceus.png", width=300)
     except Exception:
         st.markdown("🧬")
 with col_title:
