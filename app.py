@@ -16,8 +16,6 @@ with col_logo:
         st.markdown("🧬")
 with col_title:
     st.title("Biomedical Paper Summarizer")
-    st.caption("Powered by Claude · Built for researchers")
-
 st.divider()
 
 # --- API Key: use secret if available, otherwise ask the user ---
@@ -42,7 +40,6 @@ with st.sidebar:
         "including objectives, methods, findings, drug targets, and clinical implications."
     )
     st.markdown("---")
-    st.markdown("Built by a Bioinformatics / Data Science student as a portfolio project.")
 
 # --- Main input ---
 st.subheader("Paste your abstract")
@@ -62,7 +59,7 @@ if analyze:
     elif not abstract.strip():
         st.warning("Please paste an abstract before analyzing.")
     else:
-        with st.spinner("Analyzing abstract with Claude..."):
+        with st.spinner("Analyzing abstract..."):
             try:
                 client = anthropic.Anthropic(api_key=api_key)
                 message = client.messages.create(
